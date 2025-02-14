@@ -51,16 +51,26 @@ platform :android do
 
     version = options[:version] || "1.0.0" 
     build_number = options[:build_number] || 1
-    # release_notes = options[:release_notes] || "Lots of amazing new features to test out!"
+    release_notes = options[:release_notes] || "Lots of amazing new features to test out!"
+
+    # Define changelog directory path
+    changelog_path = "fastlane/metadata/android/en-US/changelogs/#{build_number}.txt"
+
+    # Ensure the directory exists
+    FileUtils.mkdir_p(File.dirname(changelog_path))
+
+    # Write release notes to the changelog file
+    File.write(changelog_path, release_notes)
 
     sh "flutter clean"
     sh "flutter build appbundle --build-name=#{version} --build-number=#{build_number} --flavor production --target lib/main_production.dart"
     
     #internal (for internal testing),alpha (for closed testing),beta (for open testing),production (for public release)
     upload_to_play_store(
-      track: "alpha", 
+      track: "internal", 
       aab: "../build/app/outputs/bundle/productionRelease/app-production-release.aab",
       key: "fastlane/supply.json",
+      metadata_path: "fastlane/metadata/android",
     )
   end
 end

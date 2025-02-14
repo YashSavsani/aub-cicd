@@ -94,10 +94,15 @@ android {
         //     signingConfig signingConfigs.debug
         // }
         release {
-            // Properly handle production signing
             if (project.hasProperty('target') && project.property('target').toString().equals('lib/main_production.dart')) {
                 println "Using release signing configuration"
                 signingConfig signingConfigs.release
+            } else if (project.hasProperty('target') && project.property('target').toString().equals('lib/main_staging.dart')) {
+                println "Using debug signing configuration"
+                signingConfig signingConfigs.debug
+            } else if (project.hasProperty('target') && project.property('target').toString().equals('lib/main_development.dart')) {
+                println "Using debug signing configuration"
+                signingConfig signingConfigs.debug
             } else {
                 println "Using debug signing configuration"
                 signingConfig signingConfigs.debug
