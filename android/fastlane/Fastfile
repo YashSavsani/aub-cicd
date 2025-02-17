@@ -54,7 +54,7 @@ platform :android do
     release_notes = options[:release_notes] || "Lots of amazing new features to test out!"
 
     # Define changelog directory path
-    changelog_path = "fastlane/metadata/android/en-US/changelogs/#{build_number}.txt"
+    changelog_path = "metadata/android/en-US/changelogs/#{build_number}.txt"
 
     # Ensure the directory exists
     FileUtils.mkdir_p(File.dirname(changelog_path))
