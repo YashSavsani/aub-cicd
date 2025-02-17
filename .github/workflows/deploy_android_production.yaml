@@ -56,6 +56,9 @@ jobs:
           fileName: "release.keystore"
           fileDir: 'android/app'
           encodedString: $RELEASE_KEYSTORE_FILE
+      
+      - name: Verify Keystore File
+        run: ls -l android/app/release.keystore
 
       # - name: Decode Android Keystore
       #   working-directory: android
