@@ -48,11 +48,11 @@ jobs:
           ruby-version: "3.3.6"
           bundler-cache: true
           working-directory: android
-      
+
       # - name: Decode Android Keystore
       #   working-directory: android
       #   run: echo -n $RELEASE_KEYSTORE_FILE | base64 --decode > app/release.keystore
-      
+
       - name: Configure Keystore
         run: |
           echo "$RELEASE_SIGNING_KEY" > release.jks.b64
@@ -68,6 +68,14 @@ jobs:
       - name: Setup store key properties
         working-directory: android
         run: echo "$RELEASE_KEYSTORE_PROPERTIES" > key.properties
+
+      - name: Ensure Fastlane Metadata Directory Exists
+        working-directory: android
+        run: mkdir -p fastlane/metadata/android/en-US/changelogs
+
+      - name: Check if Metadata Directory Exists
+        working-directory: android
+        run: ls -lR fastlane/metadata/android/en-US/changelogs
 
       - name: Build and Deploy to Play Store
         working-directory: android
