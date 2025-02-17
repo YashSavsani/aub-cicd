@@ -80,4 +80,4 @@ jobs:
       - name: Build and Deploy to Play Store
         working-directory: android
         run: |
-          bundle exec fastlane android production version:${{ github.event.inputs.version }} build_number:${{ github.event.inputs.build_number }}
+          bundle exec fastlane android production version:${{ github.event.inputs.version }} build_number:${{ github.event.inputs.build_number }} release_notes:${{ github.event.inputs.release_notes }}
