@@ -48,21 +48,18 @@ jobs:
           ruby-version: "3.3.6"
           bundler-cache: true
           working-directory: android
-
-      - name: Decode Keystore File
-        uses: timheuer/base64-to-file@v1
-        id: release
-        with:
-          fileName: "release.keystore"
-          fileDir: 'android/app'
-          encodedString: $RELEASE_KEYSTORE_FILE
       
-      - name: Verify Keystore File
-        run: ls -l android/app/release.keystore
-
       # - name: Decode Android Keystore
       #   working-directory: android
       #   run: echo -n $RELEASE_KEYSTORE_FILE | base64 --decode > app/release.keystore
+      
+      - name: Configure Keystore
+        run: |
+          echo "$ANDROID_KEYSTORE_FILE" > keystore.jks.b64
+          base64 -d -i keystore.jks.b64 > app/release.keystore
+
+      - name: Verify Keystore File
+        run: ls -l android/app/release.keystore
 
       - name: Set up Supply Key file
         working-directory: android
