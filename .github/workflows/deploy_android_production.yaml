@@ -31,7 +31,7 @@ jobs:
 
       - name: Setup Java
         uses: actions/setup-java@v1
-        with: 
+        with:
           java-version: "17"
 
       - name: Setup Flutter
@@ -49,9 +49,16 @@ jobs:
           bundler-cache: true
           working-directory: android
 
-      - name: Decode Android Keystore
-        working-directory: android
-        run: echo -n $RELEASE_KEYSTORE_FILE | base64 --decode > app/release.keystore
+      - name: Decode Keystore File
+        uses: timheuer/base64-to-file@v1
+        id: release
+        with:
+          fileName: "android/app/release.keystore"
+          encodedString: $RELEASE_KEYSTORE_FILE
+
+      # - name: Decode Android Keystore
+      #   working-directory: android
+      #   run: echo -n $RELEASE_KEYSTORE_FILE | base64 --decode > app/release.keystore
 
       - name: Set up Supply Key file
         working-directory: android
