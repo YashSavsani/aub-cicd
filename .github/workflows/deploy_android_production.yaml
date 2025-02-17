@@ -53,7 +53,8 @@ jobs:
         uses: timheuer/base64-to-file@v1
         id: release
         with:
-          fileName: "android/app/release.keystore"
+          fileName: "release.keystore"
+          fileDir: 'android/app'
           encodedString: $RELEASE_KEYSTORE_FILE
 
       # - name: Decode Android Keystore
