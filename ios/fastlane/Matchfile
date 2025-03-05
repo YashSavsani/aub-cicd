@@ -1,4 +1,4 @@
-git_url("https://github.com/YashSavsani/aub-cicd_cert_profile.git")
+git_url("https://github.com/YashSavsani/aub-cicd-certificates.git")
 
 storage_mode("git")
 
